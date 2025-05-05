@@ -1,0 +1,152 @@
+Análisis de Requerimientos 
+
+3.1 Funcionales 
+
+1. Gestión de productos con códigos, descripciones, presentaciones (caja, pieza, bolsa), precio y existencia. 
+2. Generación de cotizaciones dinámicas con: productos, cantidades, costo de envío.
+3. Descuentos personalizados de hasta el 20% mediante códigos. 
+4. Seguimiento a clientes: base de datos que clasifique clientes por interesados (cotizaron) y compradores (con historial de pedidos).
+5. Actualización periódica de precios desde archivo o panel de administración.
+6. Visualización del estado de pedidos y control de entregas. 
+7. Facturación automática (en futuras versiones). 
+
+3.1.1 
+Complejidad: La gestión de productos puede ser administrada por medio de una base de datos en MySQL,
+donde se puedan crear tablas para cada una de las diferentes características, así como la validación
+de los datos. Se desarrollará una API que se encargue de acceder a la base de datos con una interfaz intuitiva.
+
+Prioridad: Alta. Es un requerimiento esencial para la funcionalidad de la aplicación, 
+dado que la gestión de productos impacta directamente el negocio y el comprador.
+
+Dependencias: Se debe gestionar y mantener la base de datos de MySQL, ya que depende de esta para realizar sus funciones.
+También puede enviar la información a otras APIs para realizar la compra de productos.
+
+3.1.2
+Complejidad: La generación de cotizaciones dinámicas dependerá de varios factores, como el tipo de producto,
+la cantidad de productos y el costo del envío. Además, existen factores fuera de nuestro control, por ejemplo, aranceles,
+problemas logísticos, productos faltantes, etc. Debe existir una interfaz donde los factores constantes y variables
+puedan ser cambiados de forma eficiente, así como registrar cambios por adelantado.
+
+Prioridad: Alta. La cotización es un aspecto principal de la aplicación y es una de las funcionalidades que
+el usuario usará la mayor parte del tiempo.
+
+Dependencias: Realizar solicitudes a la base de datos de los productos para obtener todos los datos del producto.
+
+3.1.3
+Complejidad: Los descuentos personalizados interactúan con la cotización de los productos, 
+aplicando un descuento dependiendo del código. Se pueden administrar los códigos con una matriz, diccionario o hash.
+Con la base de datos, se puede determinar el inventario y las características de los productos. 
+Se creará una interfaz en la que se puedan ver las características del producto existente, 
+crear un descuento fijo o dinámico, y una vista preliminar del descuento.
+
+Prioridad: Media. Los descuentos pueden aplicarse directamente en la cotización dinámica, 
+pero crear una funcionalidad aparte puede mejorar el manejo de los precios y descuentos.
+
+Dependencias: Existirá una conexión tanto con la base de datos como con la cotización de los productos. 
+
+3.1.4 
+Complejidad: Se puede mantener el diseño de la base de datos existente y agregar tablas adicionales. 
+
+Prioridad: Media. Puede ayudar a determinar los clientes potenciales y frecuentes de forma más rápida y eficiente.
+
+Dependencias: Se usará la base de datos existente creada para la gestión de los productos, como tablas adicionales.
+
+3.1.5
+Complejidad: Se creará una interfaz donde se escriba el documento para enviarse a los clientes
+sobre el cambio de precios de los productos, ya sea por parte de la aplicación o por el vendedor.
+
+Prioridad: Baja. Aunque los descuentos pueden administrarse con la interfaz de descuentos personalizados, 
+notificar el cambio de forma instantánea puede influir en la decisión del cliente de comprar el producto.
+
+Dependencias: Trabajará con las funcionalidades de las cotizaciones y de los descuentos 
+para crear el documento de forma dinámica.
+
+3.1.6
+Complejidad: Se creará una interfaz que pueda administrar tanto los productos, 
+como la cotización de los productos, los descuentos y los datos necesarios para la venta de los productos, 
+por ejemplo, el IVA y el costo del envío. Dicha interfaz debe administrar el pedido y la entrega de este, 
+incluyendo el estado de entrega y un tiempo estimado.
+
+Prioridad: Alta. Es fundamental tener una funcionalidad para administrar la venta de productos
+por parte de los clientes.
+
+Dependencias: Varias funcionalidades se usarán para su funcionamiento eficiente: la base de datos existente, 
+la cotización de productos y los descuentos aplicados o aplicables. Además, la funcionalidad de las actualizaciones
+puede usar la información del pedido al escribir el documento.
+
+3.1.7
+Complejidad: Se creará una interfaz que pueda realizar la facturación de forma más rápida y eficiente. Se puede
+integrar a la base de datos para guardar los datos del cliente de forma encriptada y usar esa 
+información cuando se requiera.
+
+Prioridad: Media. Los clientes requieren formas de facturar sus compras y realizar los cargos eficazmente 
+a sus cuentas.
+
+Dependencias: La cotización del producto y la interfaz de administración de pedidos pueden proporcionar información 
+importante para que el cliente pueda realizar la facturación de forma eficiente y transparente.
+
+3.2 No funcionales 
+
+1. Aplicación web accesible desde distintos dispositivos. 
+2. Seguridad en la gestión de usuarios, con roles (vendedor, administrador). 
+3. Escalabilidad para crecer en nuevos servicios o sucursales. 
+4. Disponibilidad en la nube (AWS). 
+
+3.2.1
+Complejidad: La página web es el medio principal por el cual el usuario realizará su cotización y su factura,
+por lo que debe contar con alta concurrencia y accesibilidad desde distintos dispositivos, 
+como computadoras y dispositivos móviles. Además, se debe garantizar la compatibilidad 
+con los navegadores más utilizados.
+
+Prioridad: Media. Será una de las principales formas de acceder a las diferentes funcionalidades de la aplicación.
+
+Dependencias: La página web trabajará con todas las funcionalidades, sistemas y procesos de la aplicación. Requerirá
+archivos de configuración para los diferentes navegadores y dispositivos.
+
+3.2.2 
+Complejidad: Se creará un sistema de inicio de sesión/creación de cuenta. 
+MySQL, por ejemplo, permite configurar los permisos de los diferentes usuarios. 
+Crear un sistema que refleje ese nivel de seguridad ayudará a crear un control de permisos y privilegios.
+
+Prioridad: Alta. La seguridad debe ser una parte esencial en cualquier sistema. Esto permitirá evitar el acceso
+por entidades maliciosas, así como prevenir la falsificación de cuentas, DDoS y otros ciberataques.
+
+Dependencias: Este sistema se integrará con la página web para mejorar el nivel de seguridad y controlar el flujo de 
+usuarios legítimos y su nivel de permisos y privilegios.
+
+3.2.3
+Complejidad: La escalabilidad de servicios es algo que se puede lograr desde un principio usando la metodología
+de doce factores. Usando las tecnologías en la nube, así como las herramientas que ofrecen, se puede realizar 
+una escalabilidad horizontal, implementando balanceadores que distribuyan el tráfico, 
+o aumentando la cantidad de servidores. En la parte de escalabilidad vertical, 
+incrementar la potencia de los servidores también puede ser una opción. Sin embargo, en este caso, 
+depende de los planes de los servidores en la nube, comparado con un servidor físico, 
+donde comprando nuevos componentes directamente puedes obtener un mejor rendimiento. Es importante decidir
+si usar un servidor físico con mantenimiento on-site o usar servidores en la nube y tener una escalabilidad horizontal
+más fácil. Hay que comparar los beneficios contra las desventajas y riesgos.
+
+Prioridad: Media, posiblemente alta. Si el sistema actual puede mantener un alto nivel de concurrencia, así como 
+una capacidad disponible extra, no es necesario enfocarse en la escalabilidad. Pero si el sistema actual empieza
+a mostrar fallas o problemas, es recomendable crear controles, sistemas y servicios escalables desde un principio.
+
+Dependencias: La escalabilidad dependerá de qué servicios serán escalables. En general, aquellos marcados
+como alta prioridad serán los primeros en recibir los recursos para ser escalables y tener un buen mantenimiento. 
+Aun así, la escalabilidad debe mantenerse en todas las iteraciones de todas las funcionalidades, 
+debido a la arquitectura de microservicios, la cual se basa en la escalabilidad 
+sin cambios significativos en las herramientas, la arquitectura o las prácticas de desarrollo.
+
+3.2.4
+Complejidad: La disponibilidad en la nube depende de la escalabilidad del servicio en cuestión, pero conforme
+a la metodología de 12 factores, una arquitectura "serverless" es recomendable. Existen varias herramientas 
+como AWS. Estas herramientas permiten ejecutar funciones bajo demanda, 
+sin la necesidad de gestionar servidores directamente, reduciendo costos y facilitando la administración. 
+Se pueden implementar servicios de almacenamiento y bases de datos, además de las demás funcionalidades que
+se requieran.
+
+Prioridad: Media, posiblemente alta. Se reitera que la disponibilidad en la nube depende de la escalabilidad
+del servicio en cuestión. También se reitera que, de acuerdo con la metodología de 12 factores, una arquitectura
+de servidores en la nube es recomendable, incluso imprescindible.
+
+Dependencias: La disponibilidad en la nube sería la base de la mayoría de los servicios y funcionalidades, 
+por lo que es importante una conexión eficiente entre ellas para no presentar problemas de conectividad
+en el futuro.
