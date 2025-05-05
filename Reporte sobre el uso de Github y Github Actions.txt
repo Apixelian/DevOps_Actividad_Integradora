@@ -1,0 +1,61 @@
+Uso de Github y Github Actions
+
+1.1 Introducción a Github y Github Actions
+
+Github es una plataforma que en línea para alojar y gestionar proyectos de software.
+Esta basada en Git que permite el control de versiones, la colaboración entre desarrolladores
+y la gestión centralizada del código fuente como un repositorio central. 
+Facilita el seguimiento de los cambios, revisión del código mediante pull requests, 
+y la integración con herramientas externas para las etapas del ciclo de vida del desarrollo.
+
+GitHub Actions es un sistema de automatización integrado dentro de GitHub,
+que permite definir flujos de trabajo (workflows) para tareas de integración 
+y despliegue continuo (CI/CD). Los workflows se configuran mediante archivos YAML,
+y pueden activarse por eventos específicos del repositorio. Lo que permite construir "pipelines"
+para compilar, hacer pruebas, validaciones y desplegar aplicaciones de forma controlada y automatizada.
+
+Ambas herramientas, garantizan consistencia, escalabilidad y control sobre cada uno de los microservicios 
+involucrados. Debido a su integración continua con otras herramientas, Github y Github Actions son
+herramientas esenciales en este proyecto y en la aplicación.
+
+2.1 Uso de Github
+
+En el presente proyecto se ha creado un repositorio central en GitHub 
+con el objetivo de centralizar y gestionar el desarrollo de la aplicación de forma colaborativa, 
+organizada y segura. Actualmente, el repositorio cuenta con tres colaboradores activos, 
+cada uno con acceso mediante ramas independientes que asegura un flujo de trabajo controlado y sin 
+interferencias directas entre los diferentes desarrollos.
+
+Dentro del repositorio se encuentra ya alojada la versión preliminar del sitio web, 
+así como el documento de análisis de requerimientos y el esquema de dichos requerimientos 
+funcionales y no funcionales. Esta documentación sirve como base para planificar el desarrollo modular 
+y establecer prioridades de acuerdo a el análisis realizado.
+
+Cada colaborador ha trabajado sobre su propia rama, siguiendo un enfoque basado en issues. 
+Los issues corresponden a tareas concretas, como el desarrollo de funcionalidades específicas. 
+Estos se han vinculado directamente con pull requests, los cuales han sido utilizados
+para integrar código revisado y probado a la rama principal.
+
+GitHub ha servido también como herramienta control de cambios, la revisión de código entre colaboradores, 
+la gestión del historial de commits, y la documentación técnica. Esto es especialmente importante
+dado que la arquitectura basada en microservicios, donde múltiples funcionalidades deben ser desarrolladas 
+de forma paralela pero con la aplicación como tema central. El equipo, en general, 
+ha podido mantener un flujo de trabajo con la metodología ágil.
+
+2.2 Uso de GitHub Actions
+GitHub Actions se ha comenzado a utilizar en este proyecto principalmente como herramienta de automatización
+para tareas básicas relacionadas con las versiones preliminares de la página web web. 
+Actualmente, se ha configurado un workflow simple con un archivo YAML 
+que permite la construcción e implementación de la página web. 
+
+A medida que el desarrollo avance y se realize la integración de los distintos microservicios descritos 
+en la arquitectura (como MS Productos, MS Cotizaciones, MS Clientes, etc.), 
+GitHub Actions podrá configurarse para automatizar procesos más complejos. Los cuales son: 
+
+Integración continua (CI): ejecutar pruebas unitarias y de integración 
+automáticamente cuando se actualiza el código de un microservicio.
+
+Despliegue continuo (CD): construir imágenes Docker y enviarlas al Docker Registry (ECR) de AWS, 
+desde donde serán desplegadas automáticamente.
+
+Versionado automatizado: generación de tags o releases basados en commits o pull requests.
